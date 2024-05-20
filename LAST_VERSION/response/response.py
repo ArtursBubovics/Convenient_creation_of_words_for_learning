@@ -15,7 +15,7 @@ def response_func(search_word, search_word_translate, df,index,worksheet):
             response = response_generation(2,generated_sentences, search_word, search_word_translate)
     
         # Вывод ответа
-        print()  
+        print()
         print(response)
         print() 
 

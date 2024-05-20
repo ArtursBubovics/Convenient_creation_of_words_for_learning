@@ -1,10 +1,9 @@
 import random
+from AI.meaning_generation.meaning_generation_response import meaning_generation_response
 from create_set_and_insert_data_in_dictionary.create_Anki_set.create_anki_set import create_anki_set
 from create_set_and_insert_data_in_dictionary.create_Anki_set.create_images.display_images import display_images
 from create_set_and_insert_data_in_dictionary.create_Anki_set.create_images.search_images import search_images
 from UI.show_images import show_images
-from response.response import response_func
-from save_changes.confirmation_save_changes import confirmation_save_changes_func
 
 
 CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY = 1
@@ -17,26 +16,29 @@ def action_selection_func(choose_action, excel_file, df, workbook, worksheet):
     
     if(choose_action == CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY):
         deck_name = "Default"
-        word = input("Введите слово для поиска изображения: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
-        meaning = input("Введите значение слова: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+        search_word = input("Введите слово изучаемое слово: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+        # meaning = input("Введите значение слова: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
 
-        image_urls = search_images(word)
+        meaning_generation_response(search_word)
+
+
+        # image_urls = search_images(word)
         
 
-        if image_urls:
-            print("Найденные изображения:")
-            # show_images(image_urls)
-            display_images(image_urls)
+        # if image_urls:
+        #     print("Найденные изображения:")
+        #     # show_images(image_urls)
+        #     display_images(image_urls)
             
-            choice = int(input("Введите номер изображения, которое вам понравилось: "))
+        #     choice = int(input("Введите номер изображения, которое вам понравилось: "))
             
-            if 1 <= choice <= len(image_urls):
-                selected_image_url = image_urls[choice - 1]
-                # create_anki_set(deck_name, word, meaning, selected_image_url)
-            else:
-                print("Неправильный выбор номера изображения.")
-        else:
-            print("Изображения не найдены.")
+        #     if 1 <= choice <= len(image_urls):
+        #         selected_image_url = image_urls[choice - 1]
+        #         # create_anki_set(deck_name, word, meaning, selected_image_url)
+        #     else:
+        #         print("Неправильный выбор номера изображения.")
+        # else:
+        #     print("Изображения не найдены.")
     
     if(choose_action == WORDS_RANDOM_GENERATION):
         ...
