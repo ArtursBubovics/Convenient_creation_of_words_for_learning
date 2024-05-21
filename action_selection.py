@@ -1,4 +1,5 @@
 import random
+from AI.example_generation.example_generation_response import example_generation_response
 from AI.meaning_generation.meaning_generation_response import meaning_generation_response
 from create_set_and_insert_data_in_dictionary.create_Anki_set.create_anki_set import create_anki_set
 from create_set_and_insert_data_in_dictionary.create_Anki_set.create_images.display_images import display_images
@@ -17,9 +18,12 @@ def action_selection_func(choose_action, excel_file, df, workbook, worksheet):
     if(choose_action == CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY):
         deck_name = "Default"
         search_word = input("Введите слово изучаемое слово: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
-        # meaning = input("Введите значение слова: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+        meaning = input("Введите значение слова на русском: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
 
-        meaning_generation_response(search_word)
+        # meaning_generation_response(search_word, meaning)
+        
+
+        example_generation_response(search_word, meaning)
 
 
         # image_urls = search_images(word)
