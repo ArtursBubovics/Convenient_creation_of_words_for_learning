@@ -1,7 +1,4 @@
-
-
-from AI.example_generation.example_generation.example_generation import example_generation
-
+from AI.transcription_generation.transcription_generation.transcription_generation import transcription_generation
 
 def transcription_generation_response(search_word):
     generated_variants = []
@@ -9,9 +6,9 @@ def transcription_generation_response(search_word):
     while True:
 
         if not generated_variants:
-            response = example_generation(1,generated_variants, search_word)
+            response = transcription_generation(1,generated_variants, search_word)
         else:
-           response = example_generation(2,generated_variants, search_word)
+           response = transcription_generation(2,generated_variants, search_word)
         
         print()
         print(response)
