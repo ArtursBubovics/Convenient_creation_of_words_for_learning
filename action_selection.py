@@ -23,61 +23,65 @@ def action_selection_func(choose_action, excel_file, df, workbook, worksheet):
 
         final_front_sentences = []
         final_back_sentences = []
-
-        deck_name = "Default"
-
+        
         language_code = "en-US"
 
-        search_word = input("Введите изучаемое слово: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
-        meaning = input("Введите значение слова на русском: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+        deck_name = input("Enter the name of the deck: ")
+        num_cards = int(input("Enter the number of cards to create: "))
 
-        print('\n---------------------------------------------\n')
+        for i in range(num_cards):
+            print(f"\nCreating card {i + 1}/{num_cards}")
 
-        meaningReturn = meaning_generation_response(search_word, meaning)
+            search_word = input("Введите изучаемое слово: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+            meaning = input("Введите значение слова на русском: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
 
-        print('\n---------------------------------------------\n')
-        examplesReturn = example_generation_response(search_word, meaning, NUMBER_OF_EXAMPLES)
-        final_front_sentences = examplesReturn[0]
-        final_back_sentences = examplesReturn[1]
+            print('\n---------------------------------------------\n')
 
-        print('\n---------------------------------------------\n')
+            meaningReturn = meaning_generation_response(search_word, meaning)
 
-        transcriptionReturn = transcription_generation_response(search_word)
+            print('\n---------------------------------------------\n')
+            examplesReturn = example_generation_response(search_word, meaning, NUMBER_OF_EXAMPLES)
+            final_front_sentences = examplesReturn[0]
+            final_back_sentences = examplesReturn[1]
 
-        print('\n---------------------------------------------\n')
+            print('\n---------------------------------------------\n')
 
-        print('Entered data:\n')
-        print('\033[92m Meaning \033[0m: ' + meaningReturn + '\n')
+            transcriptionReturn = transcription_generation_response(search_word)
 
-        print('\033[92m Examples \033[0m:\n')
-        print('    1. \033[92m front examples \033[0m:'+ str(final_front_sentences) + '\n')
-        print('    2. \033[92m back examples \033[0m:' + str(final_back_sentences) +'\n')
+            print('\n---------------------------------------------\n')
 
-        print('\033[92m Transcription \033[0m: ' + transcriptionReturn + '\n')
+            print('Entered data:\n')
+            print('\033[92m Meaning \033[0m: ' + meaningReturn + '\n')
+
+            print('\033[92m Examples \033[0m:\n')
+            print('    1. \033[92m front examples \033[0m:'+ str(final_front_sentences) + '\n')
+            print('    2. \033[92m back examples \033[0m:' + str(final_back_sentences) +'\n')
+
+            print('\033[92m Transcription \033[0m: ' + transcriptionReturn + '\n')
 
 
-        #create_anki_card(deck_name, meaningReturn, final_front_sentences, search_word, final_back_sentences, transcriptionReturn, language_code)
+            #create_anki_card(deck_name, meaningReturn, final_front_sentences, search_word, final_back_sentences, transcriptionReturn, language_code)
 
 
 
 
-        # image_urls = search_images(word)
-        
-
-        # if image_urls:
-        #     print("Найденные изображения:")
-        #     # show_images(image_urls)
-        #     display_images(image_urls)
+            # image_urls = search_images(word)
             
-        #     choice = int(input("Введите номер изображения, которое вам понравилось: "))
-            
-        #     if 1 <= choice <= len(image_urls):
-        #         selected_image_url = image_urls[choice - 1]
-        #         # create_anki_set(deck_name, word, meaning, selected_image_url)
-        #     else:
-        #         print("Неправильный выбор номера изображения.")
-        # else:
-        #     print("Изображения не найдены.")
+
+            # if image_urls:
+            #     print("Найденные изображения:")
+            #     # show_images(image_urls)
+            #     display_images(image_urls)
+                
+            #     choice = int(input("Введите номер изображения, которое вам понравилось: "))
+                
+            #     if 1 <= choice <= len(image_urls):
+            #         selected_image_url = image_urls[choice - 1]
+            #         # create_anki_set(deck_name, word, meaning, selected_image_url)
+            #     else:
+            #         print("Неправильный выбор номера изображения.")
+            # else:
+            #     print("Изображения не найдены.")
     
     if(choose_action == WORDS_RANDOM_GENERATION):
         ...
