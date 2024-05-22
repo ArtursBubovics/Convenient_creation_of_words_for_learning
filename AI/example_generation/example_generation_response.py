@@ -23,8 +23,9 @@ def example_generation_response(search_word, meaning):
         user_input = input('Введите "+" для сохранения, "-" для повторного запроса, "/" для остановки работы и сохранения изменений: ')
 
         if(user_input == '+'):
-            if(len(suitable_generated_variants) == NUMBER_OF_EXAMPLES):
-                break
+            if(len(suitable_generated_variants) == NUMBER_OF_EXAMPLES - 1):
+                generated_variants.append(response)
+                return generated_variants
             
             generated_variants.append(response)
             suitable_generated_variants.append(response)
@@ -32,7 +33,5 @@ def example_generation_response(search_word, meaning):
 
         if(user_input == '-'):
             generated_variants.append(response)
-
-        if(user_input == '/'):
-            break
+            continue
 
