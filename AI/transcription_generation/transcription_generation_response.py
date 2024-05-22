@@ -17,7 +17,7 @@ def transcription_generation_response(search_word):
         user_input = input('Введите "+" для сохранения, "-" для повторного запроса, "/" для остановки работы и сохранения изменений: ')
 
         if(user_input == '+'):
-            return response
+            return input('Введите транскрипцию: ')
 
         if(user_input == '-'):
             generated_variants.append(response)

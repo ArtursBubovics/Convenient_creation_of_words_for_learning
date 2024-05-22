@@ -18,7 +18,7 @@ def meaning_generation_response(search_word, meaning):
         user_input = input('Введите "+" для сохранения, "-" для повторного запроса, "/" для остановки работы и сохранения изменений: ')
 
         if(user_input == '+'):
-            return response
+            return  "It's mean: " + input('Введите объяснение: ')
 
         if(user_input == '-'):
             generated_variants.append(response)

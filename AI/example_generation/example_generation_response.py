@@ -3,35 +3,35 @@
 from AI.example_generation.example_generation.example_generation import example_generation
 
 
-def example_generation_response(search_word, meaning):
+def example_generation_response(search_word, meaning, NUMBER_OF_EXAMPLES):
     generated_variants = []
-    suitable_generated_variants = []
-
-    NUMBER_OF_EXAMPLES = 2
+    suitable_generated_variants = [[],[]]
 
     while True:
-
-        if not generated_variants:
-            response = example_generation(1,generated_variants, search_word, meaning)
-        else:
-           response = example_generation(2,generated_variants, search_word, meaning)
-        
-        print()
-        print(response)
-        print() 
-
-        user_input = input('Введите "+" для сохранения, "-" для повторного запроса, "/" для остановки работы и сохранения изменений: ')
-
-        if(user_input == '+'):
-            if(len(suitable_generated_variants) == NUMBER_OF_EXAMPLES - 1):
-                generated_variants.append(response)
-                return generated_variants
+        if(len(suitable_generated_variants[0] ) != NUMBER_OF_EXAMPLES):
+            if not generated_variants:
+                response = example_generation(1,generated_variants, search_word, meaning)
+            else:
+                response = example_generation(2,generated_variants, search_word, meaning)
             
-            generated_variants.append(response)
-            suitable_generated_variants.append(response)
-            continue
+            print()
+            print(response)
+            print() 
 
-        if(user_input == '-'):
-            generated_variants.append(response)
-            continue
+            user_input = input('Введите "+" для сохранения, "-" для повторного запроса, "/" для остановки работы и сохранения изменений: ')
 
+            if(user_input == '+'):                
+                generated_variants.append(response)
+                if(NUMBER_OF_EXAMPLES > 1):
+                    suitable_generated_variants[0].append(input(f'Введите {len(suitable_generated_variants[0]) + 1} пример для передней стороны: '))
+                    suitable_generated_variants[1].append(input(f'Введите {len(suitable_generated_variants[1]) + 1} пример для задней стороны: '))
+                else:
+                    suitable_generated_variants[0].append(input(f'Введите пример для передней стороны: '))
+                    suitable_generated_variants[1].append(input(f'Введите пример для задней стороны: '))
+                continue
+
+            if(user_input == '-'):
+                generated_variants.append(response)
+                continue
+        else:
+            return suitable_generated_variants

@@ -1,14 +1,22 @@
-
 import requests
+import json
 
-def create_anki_card_with_awesome_tts(deck_name, front, back, language_code):
+def create_anki_card(deck_name, front_meaning, front_sentences, back_word, back_examples, transcription, language_code):
+    # Форматирование передней стороны карточки
+    front_field = f"{front_meaning} <br/>[sound:awesome_tts_{language_code}_front_meaning.mp3]<br/><br/>"
+    front_field += "<br/><br/>".join([f"{sentence} <br/>[sound:awesome_tts_{language_code}_front_{i}.mp3]" for i, sentence in enumerate(front_sentences, 1)])
+
+    # Форматирование задней стороны карточки
+    back_field = f"{back_word} <br/>[sound:awesome_tts_{language_code}_back_word.mp3] <br/><br/>{transcription} <br/><br/>"
+    back_field += "<br/><br/>".join([f"{example} <br/>[sound:awesome_tts_{language_code}_back_example_{i}.mp3]" for i, example in enumerate(back_examples, 1)])
+
     # Данные для создания карточки
     note = {
         "deckName": deck_name,
         "modelName": "Basic",
         "fields": {
-            "Front": front,
-            "Back": back
+            "Front": front_field,
+            "Back": back_field
         },
         "tags": []
     }
@@ -30,40 +38,7 @@ def create_anki_card_with_awesome_tts(deck_name, front, back, language_code):
         if result['error'] is None:
             note_id = result['result']
             print("Card created successfully with ID:", note_id)
-
-            # Запрос на добавление TTS через Awesome TTS
-            request_data_add_tts = {
-                "action": "updateNoteFields",
-                "version": 6,
-                "params": {
-                    "note": {
-                        "id": note_id,
-                        "fields": {
-                            "Front": f"{front} [sound:awesome_tts_{language_code}_{front}.mp3]"
-                        }
-                    }
-                }
-            }
-
-            # Отправка POST-запроса на AnkiConnect для добавления TTS
-            response_tts = requests.post("http://localhost:8765", json=request_data_add_tts)
-            if response_tts.status_code == 200:
-                result_tts = response_tts.json()
-                if result_tts['error'] is None:
-                    print("TTS added successfully to card ID:", note_id)
-                else:
-                    print("Error adding TTS:", result_tts['error'])
-            else:
-                print("Failed to connect to AnkiConnect for TTS")
         else:
             print("Error:", result['error'])
     else:
         print("Failed to connect to AnkiConnect")
-
-# Пример использования
-deck_name = "Default"
-front = "What is the capital of France?"
-back = "Paris"
-language_code = "en_US"  # Укажите код языка для TTS
-
-create_anki_card_with_awesome_tts(deck_name, front, back, language_code)
