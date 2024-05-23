@@ -26,27 +26,27 @@ def action_selection_func(choose_action, excel_file, df, workbook, worksheet):
         
         language_code = "en-US"
 
-        deck_name = input("Enter the name of the deck: ")
-        num_cards = int(input("Enter the number of cards to create: "))
+        deck_name = 'TEST' #input("Enter the name of the deck: ")
+        num_cards = 1 #int(input("Enter the number of cards to create: "))
 
         for i in range(num_cards):
             print(f"\nCreating card {i + 1}/{num_cards}")
 
-            search_word = input("Введите изучаемое слово: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
-            meaning = input("Введите значение слова на русском: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+            search_word =  'apple'#input("Введите изучаемое слово: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+            meaning = 'яблоко' #input("Введите значение слова на русском: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
 
             print('\n---------------------------------------------\n')
 
-            meaningReturn = meaning_generation_response(search_word, meaning)
+            meaningReturn = 'aaa' #meaning_generation_response(search_word, meaning)
 
             print('\n---------------------------------------------\n')
-            examplesReturn = example_generation_response(search_word, meaning, NUMBER_OF_EXAMPLES)
-            final_front_sentences = examplesReturn[0]
-            final_back_sentences = examplesReturn[1]
+            #examplesReturn = example_generation_response(search_word, meaning, NUMBER_OF_EXAMPLES)
+            final_front_sentences = ['sentence1'] #examplesReturn[0]
+            final_back_sentences = ['sentence2'] #examplesReturn[1]
 
             print('\n---------------------------------------------\n')
 
-            transcriptionReturn = transcription_generation_response(search_word)
+            transcriptionReturn = 'transcription' #transcription_generation_response(search_word)
 
             print('\n---------------------------------------------\n')
 
@@ -60,7 +60,7 @@ def action_selection_func(choose_action, excel_file, df, workbook, worksheet):
             print('\033[92m Transcription \033[0m: ' + transcriptionReturn + '\n')
 
 
-            #create_anki_card(deck_name, meaningReturn, final_front_sentences, search_word, final_back_sentences, transcriptionReturn, language_code)
+            create_anki_card(deck_name, meaningReturn, final_front_sentences, search_word, final_back_sentences, transcriptionReturn, language_code)
 
 
 
