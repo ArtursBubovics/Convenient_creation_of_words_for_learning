@@ -1,9 +1,5 @@
 import random
-from AI.example_generation.example_generation_response import example_generation_response
-from AI.meaning_generation.meaning_generation_response import meaning_generation_response
-from AI.transcription_generation.transcription_generation_response import transcription_generation_response
-# from create_set_and_insert_data_in_dictionary.create_Anki_set.create_anki_set import create_anki_set
-from create_set_and_insert_data_in_dictionary.create_Anki_set.create_anki_set import create_anki_card
+from create_set_and_insert_data_in_dictionary.create_Anki_set.create_anki_card import create_anki_card
 from create_set_and_insert_data_in_dictionary.create_Anki_set.create_images.display_images import display_images
 from create_set_and_insert_data_in_dictionary.create_Anki_set.create_images.search_images import search_images
 from UI.show_images import show_images
@@ -12,7 +8,7 @@ from UI.show_images import show_images
 CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY = 1
 WORDS_RANDOM_GENERATION = 2
 PROPOSAL_RANDOM_GENERATION = 3
-
+9
 NUMBER_OF_EXAMPLES = 2
 
 # WANT_TO_FINISH = 1
@@ -21,46 +17,8 @@ def action_selection_func(choose_action, excel_file, df, workbook, worksheet):
     
     if(choose_action == CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY):
 
-        final_front_sentences = []
-        final_back_sentences = []
-        
-        language_code = "en-US"
+        create_anki_card()
 
-        deck_name = 'TEST' #input("Enter the name of the deck: ")
-        num_cards = 1 #int(input("Enter the number of cards to create: "))
-
-        for i in range(num_cards):
-            print(f"\nCreating card {i + 1}/{num_cards}")
-
-            search_word =  'apple'#input("Введите изучаемое слово: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
-            meaning = 'яблоко' #input("Введите значение слова на русском: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
-
-            print('\n---------------------------------------------\n')
-
-            meaningReturn = 'aaa' #meaning_generation_response(search_word, meaning)
-
-            print('\n---------------------------------------------\n')
-            #examplesReturn = example_generation_response(search_word, meaning, NUMBER_OF_EXAMPLES)
-            final_front_sentences = ['sentence1'] #examplesReturn[0]
-            final_back_sentences = ['sentence2'] #examplesReturn[1]
-
-            print('\n---------------------------------------------\n')
-
-            transcriptionReturn = 'transcription' #transcription_generation_response(search_word)
-
-            print('\n---------------------------------------------\n')
-
-            print('Entered data:\n')
-            print('\033[92m Meaning \033[0m: ' + meaningReturn + '\n')
-
-            print('\033[92m Examples \033[0m:\n')
-            print('    1. \033[92m front examples \033[0m:'+ str(final_front_sentences) + '\n')
-            print('    2. \033[92m back examples \033[0m:' + str(final_back_sentences) +'\n')
-
-            print('\033[92m Transcription \033[0m: ' + transcriptionReturn + '\n')
-
-
-            create_anki_card(deck_name, meaningReturn, final_front_sentences, search_word, final_back_sentences, transcriptionReturn, language_code)
 
 
 

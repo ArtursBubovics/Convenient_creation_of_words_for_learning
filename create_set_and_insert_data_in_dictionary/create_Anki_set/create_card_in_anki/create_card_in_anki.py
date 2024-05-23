@@ -4,7 +4,7 @@ import uuid
 import os
 import base64
 
-def create_anki_card(deck_name, front_meaning, front_sentences, back_word, back_examples, transcription, language_code):
+def create_card_in_anki(deck_name, front_meaning, front_sentences, back_word, back_examples, transcription, language_code):
 
     if not deck_exists(deck_name):
         create_deck(deck_name)
