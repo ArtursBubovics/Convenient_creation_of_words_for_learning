@@ -1,47 +1,24 @@
+from create_set_and_insert_data_in_dictionary.Insert_data_in_Excel.get_an_empty_field.get_an_empty_field import get_an_empty_field
 from openpyxl.styles import PatternFill
-import pandas as pd
 
-BLUE_COLOR = 'FF0070C0'
+def inset_data_in_excel(excel_file, df, workbook, worksheet, words, transcription, word_meaning, use_cases, russian_meaning):
+    print('go2')
+    EMPTY_FIELD = get_an_empty_field(excel_file, df, workbook, worksheet)
 
-def inset_data_in_excel(excel_file, df, workbook, worksheet):
-    white_cells = []
+    
+    # Заполняем значения в Excel
+    worksheet.cell(row=EMPTY_FIELD.row, column=3).value = 0
+    worksheet.cell(row=EMPTY_FIELD.row, column=4).value = words
+    worksheet.cell(row=EMPTY_FIELD.row, column=5).value = transcription
+    worksheet.cell(row=EMPTY_FIELD.row, column=6).value = word_meaning
+    worksheet.cell(row=EMPTY_FIELD.row, column=7).value = ' ; '.join(use_cases)
+    worksheet.cell(row=EMPTY_FIELD.row, column=8).value = russian_meaning
 
-    # Проход по каждой строке в Excel
-    for index, row in df.iterrows():
-        print()
-        excel_row = index + 2  # +3 для учета заголовков и начальной строки
+    red_fill = PatternFill(start_color='FF0000', end_color='FF0000', fill_type='solid')
+    worksheet.cell(row=EMPTY_FIELD.row, column=3).fill = red_fill
 
-        # Индекс столбца в Excel для 'Is in cards' (начиная с B, которая является 2-м столбцом)
-        is_in_cards_column = 3 
-
-        is_in_cards_cell = worksheet.cell(row=excel_row, column=is_in_cards_column)
-        
-        if cell_color_determination (is_in_cards_cell, BLUE_COLOR):
-            print('blue')
-            print("Дальше нету полей для ввода")
-            break
-        else:
-            print('white')
-            if not cell_has_no_fill (is_in_cards_cell):
-                print('go1')
-                if (not pd.isna(worksheet.cell(row=excel_row, column=3)) and 
-                    not pd.isna(worksheet.cell(row=excel_row, column=4)) and 
-                    not pd.isna(worksheet.cell(row=excel_row, column=5)) and 
-                    not pd.isna(worksheet.cell(row=excel_row, column=6)) and 
-                    not pd.isna(worksheet.cell(row=excel_row, column=7)) and 
-                    not pd.isna(worksheet.cell(row=excel_row, column=8))):
-                    print(worksheet.cell(row=excel_row, column=2))
-                    white_cells.append(is_in_cards_cell)
-                    break
-
-
-
-def cell_color_determination(cell, color):
-    fill = cell.fill
-    #print(f"Cell fill color: {fill.start_color.index}")
-    if isinstance(fill, PatternFill):
-        return fill.start_color.index == color
-
-def cell_has_no_fill(cell):
-    fill = cell.fill
-    return fill is None
+    green_fill = PatternFill(start_color='00B050', end_color='00B050', fill_type='solid')
+    worksheet.cell(row=EMPTY_FIELD.row, column=2).fill = green_fill
+    print('\nEverything saved correctly!')
+    # Сохраняем изменения
+    workbook.save(excel_file)
