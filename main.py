@@ -10,12 +10,12 @@ from action_selection import action_selection_func
 
 saved_flag = False
 # Загрузка данных из Excel
-excel_file = os.path.abspath(r'C:\Users\papar\Desktop\Словарь(Англ).xlsx')
-df = pd.read_excel(excel_file, engine='openpyxl')
-
+excel_file = os.path.abspath(r'C:\Users\papar\Desktop\Dictionary.xlsx')
+sheet_name = 'Dictionary'
 # Открываем Excel-файл для чтения цвета ячейки
 workbook = load_workbook(excel_file)
-worksheet = workbook.active
+worksheet = workbook[sheet_name]
+df = pd.read_excel(excel_file, sheet_name=sheet_name)
 
 print('Выберите из предложенных вариантов программу действий: ')
 print('''
@@ -24,6 +24,6 @@ print('''
 3 - вывод рандомных значений слов из словарика
 ''')
 
-choose_action = input('Какое действие Вы хотите, чтобы программа сделала: ')
+#choose_action = input('Какое действие Вы хотите, чтобы программа сделала: ')
 
-action_selection_func(int(choose_action), excel_file, df, workbook, worksheet)
+action_selection_func(int(1), excel_file, df, workbook, worksheet)

@@ -1,4 +1,5 @@
 import random
+from create_set_and_insert_data_in_dictionary.Insert_data_in_Excel.Inset_data_in_excel import inset_data_in_excel
 from create_set_and_insert_data_in_dictionary.create_Anki_set.create_anki_card import create_anki_card
 from create_set_and_insert_data_in_dictionary.create_Anki_set.create_images.display_images import display_images
 from create_set_and_insert_data_in_dictionary.create_Anki_set.create_images.search_images import search_images
@@ -17,8 +18,9 @@ def action_selection_func(choose_action, excel_file, df, workbook, worksheet):
     
     if(choose_action == CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY):
 
-        create_anki_card()
+        inset_data_in_excel(excel_file, df, workbook, worksheet)
 
+        #create_anki_card()
 
 
 
