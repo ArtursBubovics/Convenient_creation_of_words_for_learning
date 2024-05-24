@@ -2,6 +2,7 @@ from openpyxl.styles import PatternFill
 import pandas as pd
 
 BLUE_COLOR = 'FF0070C0'
+WHITE_COLOR = '00000000'
 
 def get_an_empty_field(excel_file, df, workbook, worksheet):
 
@@ -21,7 +22,7 @@ def get_an_empty_field(excel_file, df, workbook, worksheet):
             break
         else:
             print('white')
-            if not cell_has_no_fill (is_in_cards_cell):
+            if cell_has_no_fill(is_in_cards_cell):
                 print('go1')
                 if (not pd.isna(worksheet.cell(row=excel_row, column=3)) and 
                     not pd.isna(worksheet.cell(row=excel_row, column=4)) and 
@@ -36,7 +37,6 @@ def get_an_empty_field(excel_file, df, workbook, worksheet):
             else:
                 continue
 
-
 def cell_color_determination(cell, color):
     fill = cell.fill
     print(f"Cell fill color: {fill.start_color.index}")
@@ -45,4 +45,4 @@ def cell_color_determination(cell, color):
 
 def cell_has_no_fill(cell):
     fill = cell.fill
-    return fill is None
+    return fill.start_color.index == '00000000'
