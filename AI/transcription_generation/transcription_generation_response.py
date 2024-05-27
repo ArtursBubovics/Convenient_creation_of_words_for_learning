@@ -1,4 +1,5 @@
 from AI.transcription_generation.transcription_generation.transcription_generation import transcription_generation
+from input_validation import get_valid_choice
 
 def transcription_generation_response(search_word):
     generated_variants = []
@@ -14,7 +15,7 @@ def transcription_generation_response(search_word):
         print(response)
         print() 
 
-        user_input = input('Введите "+" для сохранения, "-" для повторного запроса, "/" для остановки работы и сохранения изменений: ')
+        user_input = get_valid_choice('Введите "+" для сохранения, "-" для повторного запроса, "/" для остановки работы и сохранения изменений: ')
 
         if(user_input == '+'):
             return input('Введите транскрипцию: ')

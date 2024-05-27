@@ -3,6 +3,8 @@ from create_set_and_insert_data_in_dictionary.create_Anki_set.create_card_in_ank
 from AI.example_generation.example_generation_response import example_generation_response
 from AI.meaning_generation.meaning_generation_response import meaning_generation_response
 from AI.transcription_generation.transcription_generation_response import transcription_generation_response
+from input_validation import get_non_empty_input, get_valid_number
+
 
 def create_anki_card(excel_file, df, workbook, worksheet):
     final_front_sentences = []
@@ -10,21 +12,22 @@ def create_anki_card(excel_file, df, workbook, worksheet):
     
     language_code = "en-US"
 
-    deck_name = input("Enter the name of the deck: ")
-    num_cards = int(input("Enter the number of cards to create: "))
+    deck_name = get_non_empty_input("Enter the name of the deck: ", pattern=r"^[a-zA-Zа-яА-Я0-9 ]+$")
+    num_cards = get_valid_number("Enter the number of cards to create: ")
 
     for i in range(num_cards):
         print(f"\nCreating card {i + 1}/{num_cards}")
 
-        search_word =  input("Введите изучаемое слово: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
-        meaning = input("Введите значение слова на русском: ") # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+        search_word = get_non_empty_input("Введите изучаемое слово: ", pattern=r"^[a-zA-Z0-9 ]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+        meaning = get_non_empty_input("Введите значение слова на русском: ", pattern=r"^[а-яА-Я0-9 ]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ ) ( вписать на русском или на предложением )
+
 
         print('\n---------------------------------------------\n')
 
         meaningReturn = meaning_generation_response(search_word, meaning)
 
         print('\n---------------------------------------------\n')
-        number_of_examples = input("Введите количество примеров: ")
+        number_of_examples = get_valid_number("Введите количество примеров: ")
         examplesReturn = example_generation_response(search_word, meaning, number_of_examples)
         final_front_sentences = examplesReturn[0]
         final_back_sentences = examplesReturn[1]
@@ -45,6 +48,6 @@ def create_anki_card(excel_file, df, workbook, worksheet):
         print('\033[92m Transcription \033[0m: ' + transcriptionReturn + '\n')
 
 
-        create_card_in_anki(deck_name, meaningReturn, final_front_sentences, search_word, final_back_sentences, transcriptionReturn, language_code)
+        #create_card_in_anki(deck_name, meaningReturn, final_front_sentences, search_word, final_back_sentences, transcriptionReturn, language_code)
 
-        inset_data_in_excel(excel_file, df, workbook, worksheet, search_word, transcriptionReturn, meaningReturn, final_back_sentences, meaning)
+        #inset_data_in_excel(excel_file, df, workbook, worksheet, search_word, transcriptionReturn, meaningReturn, final_back_sentences, meaning)

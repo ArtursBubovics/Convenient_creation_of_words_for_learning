@@ -1,6 +1,7 @@
 
 
 from AI.example_generation.example_generation.example_generation import example_generation
+from input_validation import get_valid_choice
 
 
 def example_generation_response(search_word, meaning, NUMBER_OF_EXAMPLES):
@@ -18,7 +19,7 @@ def example_generation_response(search_word, meaning, NUMBER_OF_EXAMPLES):
             print(response)
             print() 
 
-            user_input = input('Введите "+" для сохранения, "-" для повторного запроса, "/" для остановки работы и сохранения изменений: ')
+            user_input = get_valid_choice('Введите "+" для сохранения, "-" для повторного запроса, "/" для остановки работы и сохранения изменений: ')
 
             if(user_input == '+'):                
                 generated_variants.append(response)
