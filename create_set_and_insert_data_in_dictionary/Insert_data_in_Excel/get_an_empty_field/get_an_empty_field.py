@@ -2,7 +2,6 @@ from openpyxl.styles import PatternFill
 import pandas as pd
 
 BLUE_COLOR = 'FF0070C0'
-WHITE_COLOR = '00000000'
 
 def get_an_empty_field(excel_file, df, workbook, worksheet):
 
@@ -16,7 +15,7 @@ def get_an_empty_field(excel_file, df, workbook, worksheet):
 
         is_in_cards_cell = worksheet.cell(row=excel_row, column=is_in_cards_column)
         
-        if cell_color_determination (is_in_cards_cell, BLUE_COLOR):
+        if cell_color_determination (is_in_cards_cell, 'FF0070C0'):
             print('blue')
             print("Дальше нету полей для ввода")
             break

@@ -4,6 +4,8 @@ import uuid
 import os
 import base64
 
+MEDIA_FOLDER = r'C:\Users\papar\AppData\Roaming\Anki2\1-й пользователь\collection.media'
+
 def create_card_in_anki(deck_name, front_meaning, front_sentences, back_word, back_examples, transcription, language_code):
 
     if not deck_exists(deck_name):
@@ -99,8 +101,9 @@ def create_audio_files(front_meaning, front_sentences, back_word, back_examples,
     
     def save_audio(text, prefix):
         file_name = f"{prefix}_{uuid.uuid4().hex}.mp3"
+        file_path = os.path.join(MEDIA_FOLDER, file_name)
         tts = gTTS(text=text, lang=language_code)
-        tts.save(file_name)
+        tts.save(file_path)
         return file_name
     
     # Create audio for front_meaning
@@ -121,7 +124,7 @@ def create_audio_files(front_meaning, front_sentences, back_word, back_examples,
 
 def upload_audio_files(audio_paths):
     # Список файлов для загрузки
-    files_to_upload = [{"filename": os.path.basename(path), "path": path} for path in audio_paths.values()]
+    files_to_upload = [{"filename": file_name, "path": os.path.join(MEDIA_FOLDER, file_name)} for file_name in audio_paths.values()]
     
     # Формирование запроса для загрузки файлов
     request_data = {
