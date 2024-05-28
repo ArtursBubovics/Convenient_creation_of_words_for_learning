@@ -1,6 +1,14 @@
 import re
 
-def get_non_empty_input(prompt, pattern=None):
+def get_non_empty_input(prompt):
+    while True:
+        user_input = input(prompt).strip()
+        if not user_input:
+            print("Ошибка: Ввод не может быть пустым. Пожалуйста, попробуйте снова.")
+        else:
+            return user_input
+
+def get_non_empty_and_symbol_input(prompt, pattern=None):
     while True:
         user_input = input(prompt).strip()
         if not user_input:
