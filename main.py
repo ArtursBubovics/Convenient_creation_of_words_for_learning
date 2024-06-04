@@ -26,4 +26,4 @@ print('''
 
 #choose_action = input('Какое действие Вы хотите, чтобы программа сделала: ')
 
-action_selection_func(int(1), excel_file, df, workbook, worksheet)
+action_selection_func(int(2), excel_file, df, workbook, worksheet)

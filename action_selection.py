@@ -3,12 +3,13 @@ from create_set_and_insert_data_in_dictionary.create_Anki_set.create_anki_card i
 from create_set_and_insert_data_in_dictionary.create_Anki_set.create_images.display_images import display_images
 from create_set_and_insert_data_in_dictionary.create_Anki_set.create_images.search_images import search_images
 from UI.show_images import show_images
+from random_word_generation_from_dictionary.random_word_generation_from_dictionary import random_word_generation_from_dictionary
 
 
 CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY = 1
 WORDS_RANDOM_GENERATION = 2
 PROPOSAL_RANDOM_GENERATION = 3
-9
+
 NUMBER_OF_EXAMPLES = 2
 
 # WANT_TO_FINISH = 1
@@ -41,7 +42,7 @@ def action_selection_func(choose_action, excel_file, df, workbook, worksheet):
             #     print("Изображения не найдены.")
     
     if(choose_action == WORDS_RANDOM_GENERATION):
-        ...
+        random_word_generation_from_dictionary(excel_file, df, workbook, worksheet)
 
     if(choose_action == PROPOSAL_RANDOM_GENERATION):
         ...
