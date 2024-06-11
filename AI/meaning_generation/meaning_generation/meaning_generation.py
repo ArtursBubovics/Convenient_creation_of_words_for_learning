@@ -1,4 +1,5 @@
 import g4f
+from g4f.Provider import You
 
 FIRST_REQUES = 1
 
@@ -16,10 +17,10 @@ def meaning_generation(variant_value, generated_variants, search_word, meaning):
     try:
         # Получение ответа от GPT
         response = g4f.ChatCompletion.create(
-            model=g4f.models.gpt_4,
+            model="gpt-3.5-turbo",
+            provider=g4f.Provider.You,
             messages=[{"role": "user", "content": request}]
         )
-
         return response
 
     except Exception as e:

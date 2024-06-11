@@ -42,6 +42,7 @@ def action_selection_func(choose_action, excel_file, df, workbook, worksheet):
             #     print("Изображения не найдены.")
     
     if(choose_action == WORDS_RANDOM_GENERATION):
+        
         random_word_generation_from_dictionary(excel_file, df, workbook, worksheet)
 
     if(choose_action == PROPOSAL_RANDOM_GENERATION):

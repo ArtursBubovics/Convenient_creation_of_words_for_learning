@@ -24,6 +24,6 @@ print('''
 3 - вывод рандомных значений слов из словарика
 ''')
 
-#choose_action = input('Какое действие Вы хотите, чтобы программа сделала: ')
+choose_action = input('Какое действие Вы хотите, чтобы программа сделала: ')
 
-action_selection_func(int(2), excel_file, df, workbook, worksheet)
+action_selection_func(int(choose_action), excel_file, df, workbook, worksheet)
