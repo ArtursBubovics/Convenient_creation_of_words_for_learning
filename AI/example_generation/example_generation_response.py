@@ -4,16 +4,16 @@ from AI.example_generation.example_generation.example_generation import example_
 from input_validation import get_valid_choice
 
 
-def example_generation_response(search_word, meaning, NUMBER_OF_EXAMPLES):
+def example_generation_response(search_word, meaning, NUMBER_OF_EXAMPLES, words_generation_complexity):
     generated_variants = []
     suitable_generated_variants = [[],[]]
 
     while True:
         if(len(suitable_generated_variants[0] ) != NUMBER_OF_EXAMPLES):
             if not generated_variants:
-                response = example_generation(1,generated_variants, search_word, meaning)
+                response = example_generation(1,generated_variants, search_word, meaning, words_generation_complexity)
             else:
-                response = example_generation(2,generated_variants, search_word, meaning)
+                response = example_generation(2,generated_variants, search_word, meaning, words_generation_complexity)
             
             print()
             print(response)

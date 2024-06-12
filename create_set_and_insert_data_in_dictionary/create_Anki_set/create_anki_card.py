@@ -3,6 +3,7 @@ from create_set_and_insert_data_in_dictionary.create_Anki_set.create_card_in_ank
 from AI.example_generation.example_generation_response import example_generation_response
 from AI.meaning_generation.meaning_generation_response import meaning_generation_response
 from AI.transcription_generation.transcription_generation_response import transcription_generation_response
+from create_set_and_insert_data_in_dictionary.create_Anki_set.words_generation_complexity.words_generation_complexity import words_generation_complexity_func
 from input_validation import get_non_empty_input, get_non_empty_and_symbol_input, get_valid_number
 
 
@@ -14,6 +15,8 @@ def create_anki_card(excel_file, df, workbook, worksheet):
 
     deck_name = get_non_empty_input("Enter the name of the deck: ")
     num_cards = get_valid_number("Enter the number of cards to create: ")
+    words_generation_complexity = words_generation_complexity_func()
+
 
     for i in range(num_cards):
         print(f"\nCreating card {i + 1}/{num_cards}")
@@ -24,11 +27,11 @@ def create_anki_card(excel_file, df, workbook, worksheet):
 
         print('\n---------------------------------------------\n')
 
-        meaningReturn = meaning_generation_response(search_word, meaning)
+        meaningReturn = meaning_generation_response(search_word, meaning, words_generation_complexity)
 
         print('\n---------------------------------------------\n')
         number_of_examples = get_valid_number("Введите количество примеров: ")
-        examplesReturn = example_generation_response(search_word, meaning, number_of_examples)
+        examplesReturn = example_generation_response(search_word, meaning, number_of_examples, words_generation_complexity)
         final_front_sentences = examplesReturn[0]
         final_back_sentences = examplesReturn[1]
 

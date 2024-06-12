@@ -2,15 +2,15 @@ from AI.meaning_generation.meaning_generation.meaning_generation import meaning_
 from input_validation import get_valid_choice
 
 
-def meaning_generation_response(search_word, meaning):
+def meaning_generation_response(search_word, meaning, words_generation_complexity):
     generated_variants = []
 
     while True:
 
         if not generated_variants:
-            response = meaning_generation(1,generated_variants, search_word, meaning)
+            response = meaning_generation(1,generated_variants, search_word, meaning, words_generation_complexity)
         else:
-           response = meaning_generation(2,generated_variants, search_word, meaning)
+           response = meaning_generation(2,generated_variants, search_word, meaning, words_generation_complexity)
         
         print()
         print(response)
