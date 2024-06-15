@@ -53,4 +53,4 @@ def create_anki_card(excel_file, df, workbook, worksheet):
 
         create_card_in_anki(deck_name, meaningReturn, final_front_sentences, search_word, final_back_sentences, transcriptionReturn, language_code)
 
-        inset_data_in_excel(excel_file, df, workbook, worksheet, search_word, transcriptionReturn, meaningReturn, final_back_sentences, meaning)
+        # inset_data_in_excel(excel_file, df, workbook, worksheet, search_word, transcriptionReturn, meaningReturn, final_back_sentences, meaning)

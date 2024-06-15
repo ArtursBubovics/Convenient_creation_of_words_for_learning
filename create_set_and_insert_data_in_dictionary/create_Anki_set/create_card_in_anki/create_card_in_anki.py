@@ -3,10 +3,40 @@ from gtts import gTTS
 import uuid
 import os
 import base64
+import time
+import subprocess
 
 MEDIA_FOLDER = r'C:\Users\papar\AppData\Roaming\Anki2\1-й пользователь\collection.media'
 
+def is_anki_running():
+    try:
+        response = requests.post("http://localhost:8765", json={"action": "version", "version": 6})
+        if response.status_code == 200:
+            return True
+    except requests.exceptions.ConnectionError:
+        return False
+
+def start_anki():
+    anki_path = r'C:\Users\papar\AppData\Local\Programs\Anki\anki.exe'
+    if os.path.exists(anki_path):
+        subprocess.Popen(['cmd', '/c', 'start', '', anki_path], shell=True)
+        
+        # Проверяем состояние Anki каждые 2 секунды, максимум 30 секунд
+        for _ in range(15):
+            if is_anki_running():
+                print("Anki started successfully.")
+                return
+            time.sleep(2)
+        
+        print("Failed to start Anki within the timeout period.")
+    else:
+        print(f"Anki not found at {anki_path}")
+
 def create_card_in_anki(deck_name, front_meaning, front_sentences, back_word, back_examples, transcription, language_code):
+
+    if not is_anki_running():
+        print("Anki is not running. Starting Anki...")
+        start_anki()
 
     if not deck_exists(deck_name):
         create_deck(deck_name)
@@ -77,7 +107,6 @@ def deck_exists(deck_name):
 
 
 def create_deck(deck_name):
-    # Запрос к AnkiConnect для создания новой колоды
     request_data = {
         "action": "createDeck",
         "version": 6,
