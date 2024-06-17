@@ -14,11 +14,11 @@ NUMBER_OF_EXAMPLES = 2
 
 # WANT_TO_FINISH = 1
 
-def action_selection_func(choose_action, excel_file, df, workbook, worksheet):
+def action_selection_func(action, df, wb, ws):
     
-    if(choose_action == CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY):
+    if(action == CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY):
         
-        create_anki_card(excel_file, df, workbook, worksheet,)
+        create_anki_card(df, wb, ws)
 
 
 
@@ -41,11 +41,12 @@ def action_selection_func(choose_action, excel_file, df, workbook, worksheet):
             # else:
             #     print("Изображения не найдены.")
     
-    if(choose_action == WORDS_RANDOM_GENERATION):
+    if(action == WORDS_RANDOM_GENERATION):
         
-        random_word_generation_from_dictionary(excel_file, df, workbook, worksheet)
+        # random_word_generation_from_dictionary(excel_file, df, workbook, sheet_name)
+        ...
 
-    if(choose_action == PROPOSAL_RANDOM_GENERATION):
+    if(action == PROPOSAL_RANDOM_GENERATION):
         ...
     
 

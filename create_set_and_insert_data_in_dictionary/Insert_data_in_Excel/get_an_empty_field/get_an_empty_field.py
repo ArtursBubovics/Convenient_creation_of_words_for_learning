@@ -1,47 +1,42 @@
-from openpyxl.styles import PatternFill
-import pandas as pd
+BLUE_COLOR = (0, 112, 192)  # RGB для синего цвета
 
-BLUE_COLOR = 'FF0070C0'
+def get_an_empty_field(ws, df):
 
-def get_an_empty_field(excel_file, df, workbook, worksheet):
-
-    # Проход по каждой строке в Excel
+    # Проход по каждой строке в DataFrame
     for index, row in df.iterrows():
-        print()
-        excel_row = index + 2  # +3 для учета заголовков и начальной строки
+        excel_row = index + 2  # +2 для учета заголовков и начальной строки
 
-        # Индекс столбца в Excel для 'Is in cards' (начиная с B, которая является 2-м столбцом)
-        is_in_cards_column = 2
+        # Ищем ячейку, указывающую на то, что места для ввода больше нет
+        is_in_cards_column = 2  # Индекс столбца 'Is in cards'
 
-        is_in_cards_cell = worksheet.cell(row=excel_row, column=is_in_cards_column)
-        
-        if cell_color_determination (is_in_cards_cell, 'FF0070C0'):
-            print('blue')
-            print("Дальше нету полей для ввода")
-            break
+        is_in_cards_cell = ws.cells(excel_row, is_in_cards_column)
+
+        if cell_color_determination(is_in_cards_cell, BLUE_COLOR):
+            print("Дальше нет полей для ввода")
+            return None
         else:
-            print('white')
+            # Проверяем, есть ли заполнение у текущей ячейки
             if cell_has_no_fill(is_in_cards_cell):
-                print('go1')
-                if (not pd.isna(worksheet.cell(row=excel_row, column=3)) and 
-                    not pd.isna(worksheet.cell(row=excel_row, column=4)) and 
-                    not pd.isna(worksheet.cell(row=excel_row, column=5)) and 
-                    not pd.isna(worksheet.cell(row=excel_row, column=6)) and 
-                    not pd.isna(worksheet.cell(row=excel_row, column=7)) and 
-                    not pd.isna(worksheet.cell(row=excel_row, column=8))):
-                    print(worksheet.cell(row=excel_row, column=2))
-                    return worksheet.cell(row=excel_row, column=2)
+                if (ws.cells(excel_row, 3).value is None or ws.cells(excel_row, 3).value == '' or
+                    ws.cells(excel_row, 4).value is None or ws.cells(excel_row, 4).value == '' or
+                    ws.cells(excel_row, 5).value is None or ws.cells(excel_row, 5).value == '' or
+                    ws.cells(excel_row, 6).value is None or ws.cells(excel_row, 6).value == '' or
+                    ws.cells(excel_row, 7).value is None or ws.cells(excel_row, 7).value == '' or
+                    ws.cells(excel_row, 8).value is None or ws.cells(excel_row, 8).value == ''):
+                    
+                    print('Найдено пустое поле')
+                    return (excel_row, 4)
                 else:
                     continue
             else:
                 continue
+    return None
 
 def cell_color_determination(cell, color):
-    fill = cell.fill
-    print(f"Cell fill color: {fill.start_color.index}")
-    if isinstance(fill, PatternFill):
-        return fill.start_color.index == color
+    # Проверяем цвет ячейки
+    fill_color = cell.color
+    return fill_color == color
 
 def cell_has_no_fill(cell):
-    fill = cell.fill
-    return fill.start_color.index == '00000000'
+    # Проверяем, пустая ли ячейка
+    return cell.color is None
