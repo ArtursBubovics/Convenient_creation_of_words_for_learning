@@ -12,7 +12,7 @@ def meaning_generation(variant_value, generated_variants, search_word, meaning, 
         request = f'\nWrite only a simple meaning in English for the {words_generation_complexity} level of the word \033[92m{search_word}\033[0m where a word with meaning will be used {meaning}! Don`t use Russian words in your sentences! Don`t use the word itself in a sentence! Don`t use one of these {generated_variants} sentences, write another!'
     
     print(request)
-    print('Немного подождите...')
+    print('\nWait a little...')
 
     try:
         # Получение ответа от GPT
@@ -24,4 +24,4 @@ def meaning_generation(variant_value, generated_variants, search_word, meaning, 
         return response
 
     except Exception as e:
-        print(f"Произошла ошибка при выполнении запроса к GPT: {e}")
+        print(f"An error occurred while executing a GPT request: {e}")

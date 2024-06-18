@@ -29,6 +29,6 @@ def words_generation_complexity_func():
                 print(f"\nYou have selected complexity level: \033[92m{complexity_map[words_generation_complexity]}\033[0m \n")
                 return complexity_map[words_generation_complexity]
             else:
-                print("Неверный ввод. Пожалуйста, выберите уровень сложности из предложенного списка. \n")
+                print("Invalid entry. Please select a difficulty level from the list provided. \n")
         except ValueError:
-            print("Неверный ввод. Введите число от 1 до 6.\n")
+            print("Invalid input. Enter a number from 1 to 6.\n")

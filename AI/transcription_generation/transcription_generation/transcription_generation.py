@@ -12,7 +12,7 @@ def transcription_generation(variant_value, generated_variants, search_word):
         request = f'\nWrite US and UK transcription of the word \033[92m{search_word}\033[0m. Don`t use one of these {generated_variants} examples, write another!'
     
     print(request)
-    print('Немного подождите...')
+    print('\nWait a little...')
 
     try:
         # Получение ответа от GPT
@@ -24,4 +24,4 @@ def transcription_generation(variant_value, generated_variants, search_word):
         return response
 
     except Exception as e:
-        print(f"Произошла ошибка при выполнении запроса к GPT: {e}")
+        print(f"An error occurred while executing a GPT request: {e}")

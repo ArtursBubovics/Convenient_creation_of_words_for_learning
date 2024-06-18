@@ -21,8 +21,8 @@ def create_anki_card(df, wb, ws):
     for i in range(num_cards):
         print(f"\nCreating card {i + 1}/{num_cards}")
 
-        search_word = get_non_empty_and_symbol_input("Введите изучаемое слово: ", pattern=r"^[a-zA-Z0-9 ]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
-        meaning = get_non_empty_and_symbol_input("Введите значение слова на русском: ", pattern=r"^[а-яА-Я0-9 ]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ ) ( вписать на русском или на предложением )
+        search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern=r"^[a-zA-Z0-9 ]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+        meaning = get_non_empty_and_symbol_input("Enter the meaning of the word in Russian: ", pattern=r"^[а-яА-Я0-9 ]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ ) ( вписать на русском или на предложением )
 
 
         print('\n---------------------------------------------\n')
@@ -30,7 +30,7 @@ def create_anki_card(df, wb, ws):
         meaningReturn = meaning_generation_response(search_word, meaning, words_generation_complexity)
 
         print('\n---------------------------------------------\n')
-        number_of_examples = get_valid_number("Введите количество примеров: ")
+        number_of_examples = get_valid_number("Enter the number of examples: ")
         examplesReturn = example_generation_response(search_word, meaning, number_of_examples, words_generation_complexity)
         final_front_sentences = examplesReturn[0]
         final_back_sentences = examplesReturn[1]
@@ -50,7 +50,8 @@ def create_anki_card(df, wb, ws):
 
         print('\033[92m Transcription \033[0m: ' + transcriptionReturn + '\n')
 
-
+        print('\n---------------------------------------------\n')
+        
         create_card_in_anki(deck_name, meaningReturn, final_front_sentences, search_word, final_back_sentences, transcriptionReturn, language_code)
 
         inset_data_in_excel(df, wb, ws, search_word, transcriptionReturn, meaningReturn, final_back_sentences, meaning)

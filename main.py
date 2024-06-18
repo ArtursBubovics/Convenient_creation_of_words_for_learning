@@ -15,14 +15,14 @@ wb = xw.Book(r'C:\Users\papar\Desktop\Dictionary.xlsx')
 ws = wb.sheets[sheet_name]
 df = ws.range('A1').options(pd.DataFrame, header=1, index=False, expand='table').value
 
-print('Выберите из предложенных вариантов программу действий: ')
+print('Choose a program of action from the following options: ')
 print('''
-1 - создать сет в anki и заполнить словарь в excel
-2 - вывод рандомных слов из словарика
-3 - вывод рандомных значений слов из словарика
+1 - create a set in anki and populate the dictionary in excel
+2 - print random words from the dictionary
+3 - print values of random words from the dictionary
 ''')
 
-choose_action = input('Какое действие Вы хотите, чтобы программа сделала: ')
+choose_action = input('What action you want the program to do: ')
 
 action_selection_func(int(choose_action), df, wb, ws)
 

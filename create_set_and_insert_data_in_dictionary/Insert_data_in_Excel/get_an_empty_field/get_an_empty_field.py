@@ -12,7 +12,7 @@ def get_an_empty_field(ws, df):
         is_in_cards_cell = ws.cells(excel_row, is_in_cards_column)
 
         if cell_color_determination(is_in_cards_cell, BLUE_COLOR):
-            print("Дальше нет полей для ввода")
+            print("There are no further fields to enter")
             return None
         else:
             # Проверяем, есть ли заполнение у текущей ячейки
@@ -24,7 +24,7 @@ def get_an_empty_field(ws, df):
                     ws.cells(excel_row, 7).value is None or ws.cells(excel_row, 7).value == '' or
                     ws.cells(excel_row, 8).value is None or ws.cells(excel_row, 8).value == ''):
                     
-                    print('Найдено пустое поле')
+                    print('Found an empty field')
                     return (excel_row, 4)
                 else:
                     continue
