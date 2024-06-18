@@ -10,6 +10,7 @@ def example_generation_response(search_word, meaning, NUMBER_OF_EXAMPLES, words_
 
     while True:
         if(len(suitable_generated_variants[0] ) != NUMBER_OF_EXAMPLES):
+            print(f'\nWrite one simple sentence in English for the {words_generation_complexity} level where the word \033[92m{search_word}\033[0m is used with the meaning {meaning}. Don`t use Russian words in your sentences!')
             if not generated_variants:
                 response = example_generation(1,generated_variants, search_word, meaning, words_generation_complexity)
             else:
@@ -33,6 +34,7 @@ def example_generation_response(search_word, meaning, NUMBER_OF_EXAMPLES, words_
 
             if(user_input == '-'):
                 generated_variants.append(response)
+                print('\n' * 2)
                 continue
         else:
             return suitable_generated_variants

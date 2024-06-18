@@ -15,7 +15,7 @@ wb = xw.Book(r'C:\Users\papar\Desktop\Dictionary.xlsx')
 ws = wb.sheets[sheet_name]
 df = ws.range('A1').options(pd.DataFrame, header=1, index=False, expand='table').value
 
-print('Choose a program of action from the following options: ')
+print('\nChoose a program of action from the following options: ')
 print('''
 1 - create a set in anki and populate the dictionary in excel
 2 - print random words from the dictionary
