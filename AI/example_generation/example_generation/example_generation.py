@@ -28,7 +28,6 @@ def example_generation(variant_value, generated_variants, search_word, meaning, 
         # Получение ответа от GPT
         response = g4f.ChatCompletion.create(
             model="gpt-3.5-turbo",
-            provider=g4f.Provider.You,
             messages=[{"role": "user", "content": request}]
         )
         return response
