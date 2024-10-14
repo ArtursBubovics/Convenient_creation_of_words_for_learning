@@ -11,9 +11,8 @@ sheet_name = 'Dictionary'
 
 # Открываем Excel-файл для чтения цвета ячейки
 app = xw.App(visible=False)
-wb = xw.Book(r'C:\Users\papar\Desktop\Dictionary.xlsx')
+wb = app.books.open(r'C:\Users\papar\Desktop\Dictionary_English.xlsx')
 ws = wb.sheets[sheet_name]
-df = ws.range('A1').options(pd.DataFrame, header=1, index=False, expand='table').value
 
 print('\nChoose a program of action from the following options: ')
 print('''
@@ -24,6 +23,6 @@ print('''
 
 choose_action = input('What action you want the program to do: ')
 
-action_selection_func(int(choose_action), df, wb, ws)
+action_selection_func(int(choose_action), wb, ws)
 
-# app.quit() closes all excels files
+app.quit()

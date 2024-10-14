@@ -1,42 +1,22 @@
-BLUE_COLOR = (0, 112, 192)  # RGB для синего цвета
+def get_an_empty_field(ws):
+    last_row_excel = ws.range('A1').end('down').row
 
-def get_an_empty_field(ws, df):
+    has_empty_fields = False
 
-    # Проход по каждой строке в DataFrame
-    for index, row in df.iterrows():
-        excel_row = index + 2  # +2 для учета заголовков и начальной строки
+    for excel_row in range(2, last_row_excel + 1):
+        empty_fields = [
+            ws.cells(excel_row, col).value is None or ws.cells(excel_row, col).value == ''
+            for col in range(3, 9)
+        ]
 
-        # Ищем ячейку, указывающую на то, что места для ввода больше нет
-        is_in_cards_column = 2  # Индекс столбца 'Is in cards'
+        if any(empty_fields):
+            print('Found an empty field')
+            has_empty_fields = True 
+            print('excel_row:' + str(excel_row))
+            return (excel_row, 4)
 
-        is_in_cards_cell = ws.cells(excel_row, is_in_cards_column)
-
-        if cell_color_determination(is_in_cards_cell, BLUE_COLOR):
-            print("There are no further fields to enter")
-            return None
-        else:
-            # Проверяем, есть ли заполнение у текущей ячейки
-            if cell_has_no_fill(is_in_cards_cell):
-                if (ws.cells(excel_row, 3).value is None or ws.cells(excel_row, 3).value == '' or
-                    ws.cells(excel_row, 4).value is None or ws.cells(excel_row, 4).value == '' or
-                    ws.cells(excel_row, 5).value is None or ws.cells(excel_row, 5).value == '' or
-                    ws.cells(excel_row, 6).value is None or ws.cells(excel_row, 6).value == '' or
-                    ws.cells(excel_row, 7).value is None or ws.cells(excel_row, 7).value == '' or
-                    ws.cells(excel_row, 8).value is None or ws.cells(excel_row, 8).value == ''):
-                    
-                    print('Found an empty field')
-                    return (excel_row, 4)
-                else:
-                    continue
-            else:
-                continue
+    if not has_empty_fields:
+        print('No empty fields found. Returning next row after the last filled row.')
+        print('last_row_excel:' + str(last_row_excel+1))
+        return (last_row_excel + 1, 4)
     return None
-
-def cell_color_determination(cell, color):
-    # Проверяем цвет ячейки
-    fill_color = cell.color
-    return fill_color == color
-
-def cell_has_no_fill(cell):
-    # Проверяем, пустая ли ячейка
-    return cell.color is None

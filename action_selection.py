@@ -14,11 +14,11 @@ NUMBER_OF_EXAMPLES = 2
 
 # WANT_TO_FINISH = 1
 
-def action_selection_func(action, df, wb, ws):
+def action_selection_func(action, wb, ws):
     
     if(action == CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY):
         
-        create_anki_card(df, wb, ws)
+        create_anki_card(wb, ws)
 
 
 
@@ -43,7 +43,7 @@ def action_selection_func(action, df, wb, ws):
     
     if(action == WORDS_RANDOM_GENERATION):
         
-        # random_word_generation_from_dictionary(excel_file, df, workbook, sheet_name)
+        # random_word_generation_from_dictionary(excel_file, workbook, sheet_name)
         ...
 
     if(action == PROPOSAL_RANDOM_GENERATION):

@@ -7,7 +7,7 @@ from create_set_and_insert_data_in_dictionary.create_Anki_set.words_generation_c
 from input_validation import get_non_empty_input, get_non_empty_and_symbol_input, get_valid_number
 
 
-def create_anki_card(df, wb, ws):
+def create_anki_card(wb, ws):
     final_front_sentences = []
     final_back_sentences = []
     
@@ -54,4 +54,4 @@ def create_anki_card(df, wb, ws):
         
         create_card_in_anki(deck_name, meaningReturn, final_front_sentences, search_word, final_back_sentences, transcriptionReturn, language_code)
 
-        inset_data_in_excel(df, wb, ws, search_word, transcriptionReturn, meaningReturn, final_back_sentences, meaning)
+        inset_data_in_excel(wb, ws, search_word, transcriptionReturn, meaningReturn, final_back_sentences, meaning)
