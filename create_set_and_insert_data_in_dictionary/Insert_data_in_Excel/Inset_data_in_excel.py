@@ -11,7 +11,7 @@ def inset_data_in_excel(wb, ws, words, transcription, word_meaning, use_cases, r
 
     row, col = EMPTY_FIELD
     # Заполняем значения в Excel
-    ws.range((row, 1)).value = row - 2
+    ws.range((row, 1)).value = row - 1
     ws.range((row, 3)).value = 0
     ws.range((row, 4)).value = words
     ws.range((row, 5)).value = transcription
