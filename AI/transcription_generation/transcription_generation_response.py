@@ -5,7 +5,7 @@ def transcription_generation_response(search_word):
     generated_variants = []
 
     while True:
-        print(f'\nWrite US and UK transcription of the word \033[92m{search_word}\033[0m')
+        print(f'\nWrite US and UK transcription of the word \033[92m{search_word}\033[0m using IPA system')
         if not generated_variants:
             response = transcription_generation(1,generated_variants, search_word)
         else:
