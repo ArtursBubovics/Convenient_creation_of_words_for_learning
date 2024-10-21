@@ -131,7 +131,7 @@ def create_audio_files(front_meaning, front_sentences, back_word, back_examples,
     def save_audio(text, prefix):
         file_name = f"{prefix}_{uuid.uuid4().hex}.mp3"
         file_path = os.path.join(MEDIA_FOLDER, file_name)
-        tts = gTTS(text=text, lang=language_code)
+        tts = gTTS(text=text, lang=language_code, tld='us')
         tts.save(file_path)
         return file_name
     
