@@ -21,8 +21,8 @@ def create_anki_card(wb, ws):
     for i in range(num_cards):
         print(f"\nCreating card {i + 1}/{num_cards}")
 
-        search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern=r"^[a-zA-Z0-9 ]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
-        meaning = get_non_empty_and_symbol_input("Enter the meaning of the word in Russian: ", pattern=r"^[а-яА-Я0-9 ]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ ) ( вписать на русском или на предложением )
+        search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern = r"^[a-zA-Z0-9 ,;-]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+        meaning = get_non_empty_and_symbol_input("Enter the meaning of the word in Russian: ", pattern = r"^[а-яА-Я0-9 ,;-]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ ) ( вписать на русском или на предложением )
 
 
         print('\n---------------------------------------------\n')
