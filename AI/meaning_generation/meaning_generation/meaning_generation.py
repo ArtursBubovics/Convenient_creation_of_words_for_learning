@@ -27,7 +27,7 @@ def meaning_generation(variant_value, generated_variants, search_word, meaning, 
     try:
         # Получение ответа от GPT
         response = g4f.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4",
             messages=[{"role": "user", "content": request}]
         )
         return response
