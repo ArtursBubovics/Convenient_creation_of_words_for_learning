@@ -7,7 +7,7 @@ from action_selection import action_selection_func
 sheet_name = 'Dictionary'
 
 # Открываем Excel-файл для чтения цвета ячейки
-app = xw.App(visible=True)
+app = xw.App(visible=True, add_book=False)
 wb = app.books.open(r'C:\Users\papar\Desktop\Dictionary_English.xlsx', update_links=False, read_only=False)
 ws = wb.sheets[sheet_name]
 
