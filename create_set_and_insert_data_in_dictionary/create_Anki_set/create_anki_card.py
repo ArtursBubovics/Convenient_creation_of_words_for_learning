@@ -49,7 +49,7 @@ def create_anki_card(wb, ws, use_ai):
         if(use_ai):
             transcriptionReturn = transcription_generation_response(search_word)
         else:
-            transcriptionReturn = get_non_empty_and_symbol_input("Enter transcription: ", pattern = r"^[a-zA-Z0-9 ,;-]+$") # добавить все символы
+            transcriptionReturn = get_non_empty_and_symbol_input("Enter transcription: ") # добавить все символы
 
 
         print('\n---------------------------------------------\n')
