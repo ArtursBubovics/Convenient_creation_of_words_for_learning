@@ -1,13 +1,13 @@
 from create_set_and_insert_data_in_dictionary.Insert_data_in_Excel.Inset_data_in_excel import inset_data_in_excel
 from create_set_and_insert_data_in_dictionary.create_Anki_set.create_card_in_anki.create_card_in_anki import create_card_in_anki
-from AI.example_generation.example_generation_response import example_generation_response
 from AI.meaning_generation.meaning_generation_response import meaning_generation_response
 from AI.transcription_generation.transcription_generation_response import transcription_generation_response
+from create_set_and_insert_data_in_dictionary.create_Anki_set.example_enter_part.example_enter_part import example_enter_part
 from create_set_and_insert_data_in_dictionary.create_Anki_set.words_generation_complexity.words_generation_complexity import words_generation_complexity_func
 from input_validation import get_non_empty_input, get_non_empty_and_symbol_input, get_valid_number
 
 
-def create_anki_card(wb, ws):
+def create_anki_card(wb, ws, use_ai):
     final_front_sentences = []
     final_back_sentences = []
     
@@ -15,7 +15,10 @@ def create_anki_card(wb, ws):
 
     deck_name = get_non_empty_input("Enter the name of the deck: ")
     num_cards = get_valid_number("Enter the number of cards to create: ")
-    words_generation_complexity = words_generation_complexity_func()
+
+    words_generation_complexity = None
+    if(use_ai):
+        words_generation_complexity = words_generation_complexity_func()
 
 
     for i in range(num_cards):
@@ -27,17 +30,27 @@ def create_anki_card(wb, ws):
 
         print('\n---------------------------------------------\n')
 
-        meaningReturn = meaning_generation_response(search_word, meaning, words_generation_complexity)
+        if(use_ai):
+            meaningReturn = meaning_generation_response(search_word, meaning, words_generation_complexity)
+        else:
+            meaningReturn = get_non_empty_and_symbol_input("Enter meaning: ", pattern = r"^[a-zA-Z0-9 ,;-]+$")
+
 
         print('\n---------------------------------------------\n')
         number_of_examples = get_valid_number("Enter the number of examples: ")
-        examplesReturn = example_generation_response(search_word, meaning, number_of_examples, words_generation_complexity)
+
+        examplesReturn = example_enter_part(search_word, meaning, number_of_examples, use_ai, words_generation_complexity)
+
         final_front_sentences = examplesReturn[0]
         final_back_sentences = examplesReturn[1]
 
         print('\n---------------------------------------------\n')
 
-        transcriptionReturn = transcription_generation_response(search_word)
+        if(use_ai):
+            transcriptionReturn = transcription_generation_response(search_word)
+        else:
+            transcriptionReturn = get_non_empty_and_symbol_input("Enter transcription: ", pattern = r"^[a-zA-Z0-9 ,;-]+$") # добавить все символы
+
 
         print('\n---------------------------------------------\n')
 

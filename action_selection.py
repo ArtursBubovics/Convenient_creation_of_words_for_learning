@@ -6,19 +6,23 @@ from UI.show_images import show_images
 from random_word_generation_from_dictionary.random_word_generation_from_dictionary import random_word_generation_from_dictionary
 
 
-CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY = 1
-WORDS_RANDOM_GENERATION = 2
-PROPOSAL_RANDOM_GENERATION = 3
+CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY_WITHOUT_AI = 1
+CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY_WITH_AI = 2
+WORDS_RANDOM_GENERATION = 3
+PROPOSAL_RANDOM_GENERATION = 4
 
 NUMBER_OF_EXAMPLES = 2
 
 # WANT_TO_FINISH = 1
 
 def action_selection_func(action, wb, ws):
+
+    if(action == CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY_WITHOUT_AI):
+        create_anki_card(wb, ws, use_ai=False)
     
-    if(action == CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY):
+    if(action == CREATE_SET_ANKI_AND_COMPLETE_THE_DICTIONARY_WITH_AI):
         
-        create_anki_card(wb, ws)
+        create_anki_card(wb, ws, use_ai=True)
 
 
 
