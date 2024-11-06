@@ -1,9 +1,17 @@
 import random
-
+import pyttsx3
 
 def random_word_generation_from_dictionary(wb, ws):
         generate_word = True
         last_row_excel = ws.range('A2').end('down').row
+
+        engine = pyttsx3.init()
+        voices = engine.getProperty('voices')
+
+        engine.setProperty('voice', voices[1].id)
+
+        rate = engine.getProperty('rate')
+        engine.setProperty('rate', rate - 50) 
 
         while generate_word:
             if last_row_excel < 2:
@@ -16,6 +24,18 @@ def random_word_generation_from_dictionary(wb, ws):
             
             print(f"\n\nВот сгенерированое слово: \033[92m{generated_word}\033[0m")
             print(f"\n\nВот транскрипция: \033[92m{generated_transcription}\033[0m")
+
+            word_processing = input('\n\nХотите прослушать?\nДа это + ; Нет это - ;  Выберите действие: ')
+
+            if(word_processing == '+'):
+                 while True:
+                    engine.say(generated_word)
+                    engine.runAndWait()
+                    repeat_word_processing = input('\n\nХотите прослушать?\nДа это + ; Нет это - ;  Выберите действие: ')
+                    if(repeat_word_processing == '+'):
+                        continue
+                    else:
+                        break
 
             show_addinal_fields = input('\n\nХотите посмотреть дополнение к этому слову?\nДа это + ; Нет это - ;  Выберите действие: ')
 
