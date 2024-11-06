@@ -47,7 +47,7 @@ def action_selection_func(action, wb, ws):
     
     if(action == WORDS_RANDOM_GENERATION):
         
-        # random_word_generation_from_dictionary(excel_file, workbook, sheet_name)
+        random_word_generation_from_dictionary(wb, ws)
         ...
 
     if(action == PROPOSAL_RANDOM_GENERATION):

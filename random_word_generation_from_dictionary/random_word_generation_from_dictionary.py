@@ -1,56 +1,41 @@
-from openpyxl.styles import PatternFill
 import random
 
-def random_word_generation_from_dictionary(excel_file, df, workbook, worksheet):
+
+def random_word_generation_from_dictionary(wb, ws):
         generate_word = True
-
-        place_of_generated_words = []
-
-        for index, row in df.iterrows():
-            excel_row = index + 2  # +3 для учета заголовков и начальной строки
-
-            # Индекс столбца в Excel для 'Is in cards' (начиная с B, которая является 2-м столбцом)
-            is_in_cards_column = 2
-
-            is_in_cards_cell = worksheet.cell(row=excel_row, column=is_in_cards_column)
-
-            if cell_color_determination (is_in_cards_cell, 'FF0070C0'):
-                #print('blue')
-                print("Дальше нету полей для ввода")
-                break
-            else:
-                #print('green')
-                if cell_color_determination (is_in_cards_cell, 'FF00B050'):
-                    place_of_generated_words.append((excel_row, is_in_cards_column))
-                    continue
-                else:
-                     continue
-                    
-        #print(place_of_generated_words)
+        last_row_excel = ws.range('A2').end('down').row
 
         while generate_word:
-            if not place_of_generated_words:
+            if last_row_excel < 2:
                 print("Нет доступных слов для генерации")
                 break
 
-            row_value, column_value = random.choice(place_of_generated_words)
+            row_value = random.randint(2, last_row_excel)
+            generated_word = ws.range((row_value, 4)).value
+            generated_transcription = ws.range((row_value, 5)).value
             
-            print(f"\n\nВот сгенерированое слово: \033[92m{worksheet.cell(row=row_value, column=column_value+2).value}\033[0m")
+            print(f"\n\nВот сгенерированое слово: \033[92m{generated_word}\033[0m")
+            print(f"\n\nВот транскрипция: \033[92m{generated_transcription}\033[0m")
 
-            user_response = input('\nДальше генерировать?\n Да это + ; Нет это - ;  Выберите действие: ')
+            show_addinal_fields = input('\n\nХотите посмотреть дополнение к этому слову?\nДа это + ; Нет это - ;  Выберите действие: ')
+
+            if(show_addinal_fields == '+'):
+                print("\nВот дополнение: ")
+                for col in range(6, 9):
+                     print("\n* " + ws.range((row_value, col)).value)
+                     
+
+            user_response = input('\nДальше генерировать?\nДа это + ; Нет это - ;  Выберите действие: ')
 
             if(user_response == '-'):
-                if(input('\nХотите сохранить изменения?\n Да это + ; Нет это - ; Выберите действие: ') == '+'):
-                    worksheet.cell(row=row_value, column=column_value+1).value = worksheet.cell(row=row_value, column=column_value+1).value + 1
-                    workbook.save(excel_file)
+                if(input('\nХотите сохранить изменения?\nДа это + ; Нет это - ; Выберите действие: ') == '+'):
+                    current_value = ws.range((row_value, 3)).value
+                    ws.range((row_value, 3)).value = (current_value or 0) + 1
+                    wb.save(r'C:\Users\papar\Desktop\Dictionary_English.xlsx')
                     break
                 else:
                     break
             else:
-                worksheet.cell(row=row_value, column=column_value+1).value = worksheet.cell(row=row_value, column=column_value+1).value + 1
-
-
-def cell_color_determination(cell, color):
-    fill = cell.fill
-    #print(f"Cell fill color: {fill.start_color.index}")
-    return fill.start_color.index == color
+                current_value = ws.range((row_value, 3)).value
+                ws.range((row_value, 3)).value = (current_value or 0) + 1
+                wb.save(r'C:\Users\papar\Desktop\Dictionary_English.xlsx')
