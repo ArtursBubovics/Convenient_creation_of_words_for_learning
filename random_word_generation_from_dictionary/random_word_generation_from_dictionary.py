@@ -22,22 +22,25 @@ def random_word_generation_from_dictionary(wb, ws):
             generated_word = ws.range((row_value, 4)).value
             generated_transcription = ws.range((row_value, 5)).value
             
+            print('\n---------------------------------------------\n')
             print(f"\n\nВот сгенерированое слово: \033[92m{generated_word}\033[0m")
             print(f"\n\nВот транскрипция: \033[92m{generated_transcription}\033[0m")
+            engine.say(generated_word)
+            engine.runAndWait()
 
-            word_processing = input('\n\nХотите прослушать?\nДа это + ; Нет это - ;  Выберите действие: ')
+            word_processing = input('\n\n1)Хотите прослушать еще?\nДа это + ; Нет это - ;  Выберите действие: ')
 
             if(word_processing == '+'):
                  while True:
                     engine.say(generated_word)
                     engine.runAndWait()
-                    repeat_word_processing = input('\n\nХотите прослушать?\nДа это + ; Нет это - ;  Выберите действие: ')
+                    repeat_word_processing = input('\n\nХотите прослушать еще?\nДа это + ; Нет это - ;  Выберите действие: ')
                     if(repeat_word_processing == '+'):
                         continue
                     else:
                         break
 
-            show_addinal_fields = input('\n\nХотите посмотреть дополнение к этому слову?\nДа это + ; Нет это - ;  Выберите действие: ')
+            show_addinal_fields = input('\n\n2)Хотите посмотреть дополнение к этому слову?\nДа это + ; Нет это - ;  Выберите действие: ')
 
             if(show_addinal_fields == '+'):
                 print("\nВот дополнение: ")
@@ -45,7 +48,7 @@ def random_word_generation_from_dictionary(wb, ws):
                      print("\n* " + ws.range((row_value, col)).value)
                      
 
-            user_response = input('\nДальше генерировать?\nДа это + ; Нет это - ;  Выберите действие: ')
+            user_response = input('\n3)Дальше генерировать?\nДа это + ; Нет это - ;  Выберите действие: ')
 
             if(user_response == '-'):
                 if(input('\nХотите сохранить изменения?\nДа это + ; Нет это - ; Выберите действие: ') == '+'):

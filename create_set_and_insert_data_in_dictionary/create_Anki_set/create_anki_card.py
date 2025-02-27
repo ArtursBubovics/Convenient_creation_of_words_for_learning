@@ -25,8 +25,37 @@ def create_anki_card(wb, ws, use_ai):
         print(f"\nCreating card {i + 1}/{num_cards}")
 
         search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern = r"^[a-zA-Z0-9 ,;-]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+
+        words = ws.range("F1").expand('down').value
+
+        for item in words:
+            if search_word in item:
+                print('\nWord find!')
+                #показать строку
+                row_data = ws.range("A1:K1").value
+                print('Under is word sheets:\n')
+                for index, row in enumerate(row_data, start=1):
+                    print(f'{index}){ws.range("A{start}").value}\n')
+                    print(f'{index}){ws.range("J{cell.row}").value}\n\n')
+                    
+                print('Do you want to stay keep?')
+                
+                if(input('Yes is (+) ; No is (-):') == '+'):
+                    break
+                else:
+                    search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern = r"^[a-zA-Z0-9 ,;-]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+                    break
+        
         meaning = get_non_empty_and_symbol_input("Enter the meaning of the word in Russian: ", pattern = r"^[а-яА-Я0-9 ,;-]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ ) ( вписать на русском или на предложением )
 
+
+        print('\n---------------------------------------------\n')
+
+        usageRate = get_non_empty_and_symbol_input("Enter the usage rate of the word: ", pattern = r"^[a-zA-Z0-9 ,;-]+$")
+
+        print('\n---------------------------------------------\n')
+
+        partOfSpeech = get_non_empty_and_symbol_input("Enter the part of speech of the word: ", pattern = r"^[a-zA-Z]+$")
 
         print('\n---------------------------------------------\n')
 
@@ -67,4 +96,4 @@ def create_anki_card(wb, ws, use_ai):
         
         create_card_in_anki(deck_name, meaningReturn, final_front_sentences, search_word, final_back_sentences, transcriptionReturn, language_code)
 
-        inset_data_in_excel(wb, ws, search_word, transcriptionReturn, meaningReturn, final_back_sentences, meaning)
+        inset_data_in_excel(wb, ws, usageRate, partOfSpeech, search_word, transcriptionReturn, meaningReturn, final_back_sentences, meaning)
