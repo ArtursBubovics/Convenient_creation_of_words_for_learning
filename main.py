@@ -12,7 +12,7 @@ sheet_name = 'Dictionary'
 file_path = os.path.normpath(r'C:\Users\papar\Desktop\Dictionary_English.xlsx')
 
 # Открываем Excel-файл для чтения цвета ячейки
-app = xw.App(visible=True, add_book=False)
+app = xw.App(visible=False, add_book=False)
 
 
 # Проверим, открыт ли процесс Excel
