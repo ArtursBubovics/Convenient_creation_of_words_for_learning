@@ -1,3 +1,6 @@
+import time
+start_time = time.perf_counter()
+
 import os
 import pandas as pd
 import xlwings as xw
@@ -60,6 +63,11 @@ else:
 
 
 ws = wb.sheets[sheet_name]
+
+end_time = time.perf_counter()
+elapsed_time = end_time - start_time
+print(f"\nПрограмма загрузилась за {elapsed_time:.2f} секунд.\n")
+
 
 print('\nChoose a program of action from the following options: ')
 print('''
