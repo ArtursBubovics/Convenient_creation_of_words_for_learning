@@ -81,4 +81,5 @@ choose_action = input('What action you want the program to do: ')
 
 action_selection_func(int(choose_action), wb, ws)
 
-# app.quit()
+wb.close()
+app.quit()
