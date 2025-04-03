@@ -97,10 +97,71 @@ def create_anki_card(wb, ws, use_ai):
         print('    1. \033[92m front examples\033[0m: '+ str(final_front_sentences) + '\n')
         print('    2. \033[92m back examples\033[0m:' + str(final_back_sentences) +'\n')
 
-        print('\033[92m Transcription \033[0m: ' + transcriptionReturn + '\n')
-
         print('\n---------------------------------------------\n')
+
+        while True:
+            print('You want to make a change?')
+
+            if(get_non_empty_and_symbol_input("Enter (+) to change or (-) to continue: ", pattern = r"^[+-]$") == '+'): # тут проблема с симболом когда я ввожу - то он все рано продолжает работать и заходит в иф
+                print('\n---------------------------------------------\n')
+                print('You can change any data. \n')
+                print('If you want to change the word, please enter 1\n')
+                print('If you want to change the meaning, please enter 2\n')
+                print('If you want to change the transcription, please enter 3\n')
+                print('If you want to change the usage rate, please enter 4\n')
+                print('If you want to change the part of speech, please enter 5\n')
+                print('If you want to change the excamples, please enter 6\n')
+                
+                while True:
+                    match get_valid_number("Enter the number of the data you want to change: "): # проврека должна быть на float числа .....
+                        case 1:
+                            search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern = r"^[a-zA-Z0-9 ,;()\-!_?.`']+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+                            break
+                        case 2:
+                            meaning = get_non_empty_and_symbol_input("Enter the meaning of the word in Russian: ", pattern = r"^[a-zA-Zа-яА-Я0-9 ,;()\-!_?.`']+$")
+                            break
+                        case 3:
+                            transcriptionReturn = get_non_empty_and_symbol_input("Enter transcription: ")
+                            break
+                        case 4:
+                            usageRate = get_non_empty_and_symbol_input("Enter the usage rate of the word: ", pattern = r"^[a-zA-Z0-9 +-]+$")
+                            break
+                        case 5:
+                            partOfSpeech = get_non_empty_and_symbol_input("Enter the part of speech of the word: ", pattern = r"^[a-zA-Z_]+$")
+                            break
+                        case 6:
+                            number_of_examples = get_valid_number("Enter the number of examples: ")
+                            #добавить если пользватель хочет что то одно изменить
+                            examplesReturn = example_enter_part(search_word, meaning, number_of_examples, use_ai, words_generation_complexity)
+                            final_front_sentences = examplesReturn[0]
+                            final_back_sentences = examplesReturn[1]
+                            break
+                        case _:
+                            print("Invalid choice. Please try again.")
+                            continue
+                
+                print('\n---------------------------------------------\n')
+                print('Entered data:\n')
+                print('\033[92m Word \033[0m: ' + search_word + '\n')
+                print('\033[92m Transcription \033[0m: ' + transcriptionReturn + '\n')
+                print('\033[92m Translation RU \033[0m: ' + meaning + '\n')
+
+                print('\033[92m Part Of Speech \033[0m: ' + search_word + '\n')
+                print('\033[92m Usage Rate \033[0m: ' + usageRate + '\n')
+
+                print('\033[92m Meaning \033[0m: ' + meaningReturn + '\n')
+
+                print('\033[92m Examples \033[0m:\n')
+                print('    1. \033[92m front examples\033[0m: '+ str(final_front_sentences) + '\n')
+                print('    2. \033[92m back examples\033[0m:' + str(final_back_sentences) +'\n')
+
+                print('\n---------------------------------------------\n')
+
+                break
+            break
         
-        create_card_in_anki(deck_name, meaningReturn, final_front_sentences, search_word, final_back_sentences, transcriptionReturn, language_code)
+        print('\n---------------------------------------------\n') 
+          
+        create_card_in_anki(deck_name, meaningReturn, final_front_sentences, search_word, meaning, final_back_sentences, transcriptionReturn, language_code)
 
         inset_data_in_excel(wb, ws, usageRate, partOfSpeech, search_word, transcriptionReturn, meaningReturn, final_back_sentences, meaning)

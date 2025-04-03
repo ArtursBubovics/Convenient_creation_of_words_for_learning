@@ -32,7 +32,7 @@ def start_anki():
     else:
         print(f"Anki not found at {anki_path}")
 
-def create_card_in_anki(deck_name, front_meaning, front_sentences, back_word, back_examples, transcription, language_code):
+def create_card_in_anki(deck_name, front_meaning, front_sentences, back_word, meaning, back_examples, transcription, language_code):
 
     if not is_anki_running():
         print("Anki is not running. Starting Anki...")
@@ -49,7 +49,7 @@ def create_card_in_anki(deck_name, front_meaning, front_sentences, back_word, ba
     front_field += "<br/><br/>".join([f"{i}) {sentence}<br/>" for i, sentence in enumerate(front_sentences, 1)])
 
     # Форматирование задней стороны карточки
-    back_field = f"{back_word}<br/>[sound:{audio_paths['back_word']}]<br/><br/>{transcription}<br/><br/>"
+    back_field = f"{back_word}<br/>[sound:{audio_paths['back_word']}]<br/><br/>{transcription}<br/><br/>{meaning}<br/><br/>"
     back_field += "<br/><br/>".join([f"{i}) {example}<br/>[sound:{audio_paths[f'back_example_{i}']}]" for i, example in enumerate(back_examples, 1)])
 
     # Данные для создания карточки
