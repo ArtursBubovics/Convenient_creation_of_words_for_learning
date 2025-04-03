@@ -24,7 +24,7 @@ def create_anki_card(wb, ws, use_ai):
     for i in range(num_cards):
         print(f"\nCreating card {i + 1}/{num_cards}")
 
-        search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern = r"^[a-zA-Z0-9 ,;-]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+        search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern = r"^[a-zA-Z0-9 ,;()\-!_?.`']+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
 
         words = ws.range("F1").expand('down').value
 
@@ -43,26 +43,26 @@ def create_anki_card(wb, ws, use_ai):
                 if(input('Yes is (+) ; No is (-):') == '+'):
                     break
                 else:
-                    search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern = r"^[a-zA-Z0-9 ,;-]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+                    search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern = r"^[a-zA-Z0-9 ,;()\-!_?.`']+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
                     break
         
-        meaning = get_non_empty_and_symbol_input("Enter the meaning of the word in Russian: ", pattern = r"^[а-яА-Я0-9 ,;-]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ ) ( вписать на русском или на предложением )
+        meaning = get_non_empty_and_symbol_input("Enter the meaning of the word in Russian: ", pattern = r"^[а-яА-Я0-9 ,;()\-!_?.`']+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ ) ( вписать на русском или на предложением )
 
 
         print('\n---------------------------------------------\n')
 
-        usageRate = get_non_empty_and_symbol_input("Enter the usage rate of the word: ", pattern = r"^[a-zA-Z0-9 ,;-]+$")
+        usageRate = get_non_empty_and_symbol_input("Enter the usage rate of the word: ", pattern = r"^[a-zA-Z0-9 +-]+$")
 
         print('\n---------------------------------------------\n')
 
-        partOfSpeech = get_non_empty_and_symbol_input("Enter the part of speech of the word: ", pattern = r"^[a-zA-Z]+$")
+        partOfSpeech = get_non_empty_and_symbol_input("Enter the part of speech of the word: ", pattern = r"^[a-zA-Z_]+$")
 
         print('\n---------------------------------------------\n')
 
         if(use_ai):
             meaningReturn = meaning_generation_response(search_word, meaning, words_generation_complexity)
         else:
-            meaningReturn = get_non_empty_and_symbol_input("Enter meaning: ", pattern = r"^[a-zA-Z0-9 ,;-]+$")
+            meaningReturn = get_non_empty_and_symbol_input("Enter meaning: ", pattern = r"^[a-zA-Z0-9 ,;()\-!_?.`'@#$%^&*\[\]{}]+$")
 
 
         print('\n---------------------------------------------\n')
