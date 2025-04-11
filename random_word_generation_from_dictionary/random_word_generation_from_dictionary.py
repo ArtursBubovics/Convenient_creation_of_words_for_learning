@@ -19,12 +19,17 @@ def random_word_generation_from_dictionary(wb, ws):
                 break
 
             row_value = random.randint(2, last_row_excel)
-            generated_word = ws.range((row_value, 4)).value
-            generated_transcription = ws.range((row_value, 5)).value
+            generated_word = ws.range((row_value, 6)).value
+            generated_transcription = ws.range((row_value, 7)).value
+            generated_word_excample = ws.range((row_value, 9)).value
+            generated_word_translate = ws.range((row_value, 10)).value
             
             print('\n---------------------------------------------\n')
             print(f"\n\nВот сгенерированое слово: \033[92m{generated_word}\033[0m")
             print(f"\n\nВот транскрипция: \033[92m{generated_transcription}\033[0m")
+            print(f"\n\nВот сгенерированого слова пример: \033[92m{generated_word_excample}\033[0m")
+            print(f"\n\n ----------------------------------------------\n")
+            print(f"\n\n\nВот сгенерированого слова перевод: \033[92m{generated_word_translate}\033[0m")
             engine.say(generated_word)
             engine.runAndWait()
 
@@ -41,10 +46,10 @@ def random_word_generation_from_dictionary(wb, ws):
                         break
 
             show_addinal_fields = input('\n\n2)Хотите посмотреть дополнение к этому слову?\nДа это + ; Нет это - ;  Выберите действие: ')
-
+            
             if(show_addinal_fields == '+'):
                 print("\nВот дополнение: ")
-                for col in range(6, 9):
+                for col in range(2, 11):
                      print("\n* " + ws.range((row_value, col)).value)
                      
 
