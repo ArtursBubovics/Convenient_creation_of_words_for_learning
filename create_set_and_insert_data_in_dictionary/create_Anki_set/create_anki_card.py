@@ -30,7 +30,7 @@ def create_anki_card(wb, ws, use_ai):
         while True:
             found_rows = []
             
-            search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern = r"^[a-zA-Z0-9 ,;()\-!_?.`']+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+            search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern = r"^[a-zA-Z0-9 ,;()\-!_?.`'’]+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
             
 
             for i, item in enumerate(words, start=1):
@@ -82,7 +82,7 @@ def create_anki_card(wb, ws, use_ai):
         if(use_ai):
             meaningReturn = meaning_generation_response(search_word, meaning, words_generation_complexity)
         else:
-            meaningReturn = get_non_empty_and_symbol_input("Enter meaning: ", pattern = r"^[a-zA-Z0-9 ,;()\-!_?.`'@#$%^&*\[\]{}]+$")
+            meaningReturn = get_non_empty_and_symbol_input("Enter meaning: ", pattern = r"^[a-zA-Z0-9 ,;()\-!_?.`'’@#$%^&*\[\]{}]+$")
 
 
         print('\n---------------------------------------------\n')
