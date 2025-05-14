@@ -108,7 +108,7 @@ def create_anki_card(wb, ws, use_ai):
         print('\033[92m Transcription \033[0m: ' + transcriptionReturn + '\n')
         print('\033[92m Translation RU \033[0m: ' + meaning + '\n')
 
-        print('\033[92m Part Of Speech \033[0m: ' + search_word + '\n')
+        print('\033[92m Part Of Speech \033[0m: ' + partOfSpeech + '\n')
         print('\033[92m Usage Rate \033[0m: ' + usageRate + '\n')
 
         print('\033[92m Meaning \033[0m: ' + meaningReturn + '\n')
@@ -168,7 +168,7 @@ def create_anki_card(wb, ws, use_ai):
                 print('\033[92m Transcription \033[0m: ' + transcriptionReturn + '\n')
                 print('\033[92m Translation RU \033[0m: ' + meaning + '\n')
 
-                print('\033[92m Part Of Speech \033[0m: ' + search_word + '\n')
+                print('\033[92m Part Of Speech \033[0m: ' + partOfSpeech + '\n')
                 print('\033[92m Usage Rate \033[0m: ' + usageRate + '\n')
 
                 print('\033[92m Meaning \033[0m: ' + meaningReturn + '\n')
