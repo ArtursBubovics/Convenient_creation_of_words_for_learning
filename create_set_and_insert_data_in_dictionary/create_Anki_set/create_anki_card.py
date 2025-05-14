@@ -24,27 +24,47 @@ def create_anki_card(wb, ws, use_ai):
     for i in range(num_cards):
         print(f"\nCreating card {i + 1}/{num_cards}")
 
-        search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern = r"^[a-zA-Z0-9 ,;()\-!_?.`']+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
-
+        headers = ws.range("A1:K1").value
         words = ws.range("F1").expand('down').value
 
-        for item in words:
-            if search_word in item:
-                print('\nWord find!')
-                #показать строку
-                row_data = ws.range("A1:K1").value
-                print('Under is word sheets:\n')
-                for index, row in enumerate(row_data, start=1):
-                    print(f'{index}){ws.range("A{start}").value}\n')
-                    print(f'{index}){ws.range("J{cell.row}").value}\n\n')
+        while True:
+            found_rows = []
+            
+            search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern = r"^[a-zA-Z0-9 ,;()\-!_?.`']+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
+            
+
+            for i, item in enumerate(words, start=1):
+                if not item:
+                    continue
+
                     
+                if search_word in item:
+                    row_data = ws.range(f"A{i}:K{i}").value
+                    found_rows.append((i, row_data)) 
+
+            if found_rows:
+
+                print(f'\nFound rows where this word "{search_word}" is already used:')
+                for i, row_data in found_rows:
+                    print(f"\nRow {i} (A{i}:K{i}):")
+                    print('---------------------------------------------')
+                    for  header, value in zip(headers, row_data):
+                        if isinstance(value, str) and search_word in value:
+                            # Подсвечиваем слово вручную
+                            highlighted = value.replace(search_word, f"\033[38;5;214m {search_word} \033[0m")
+                            print(f"* {header}: {highlighted}")
+                        else:
+                            print(f"* {header}: {value if value is not None else '-'}")
+                print('---------------------------------------------\n')
                 print('Do you want to stay keep?')
-                
-                if(input('Yes is (+) ; No is (-):') == '+'):
+                if input('Yes is (+) ; No is (-): ') == '+':
                     break
                 else:
-                    search_word = get_non_empty_and_symbol_input("Enter the word you are studying: ", pattern = r"^[a-zA-Z0-9 ,;()\-!_?.`']+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ )
-                    break
+                    continue
+            else:
+                break
+
+        print('\n---------------------------------------------\n')
         
         meaning = get_non_empty_and_symbol_input("Enter the meaning of the word in Russian: ", pattern = r"^[а-яА-Я0-9 ,;()\-!_?.`']+$")  # СДЕЛАТЬ ВЫБР ( ГЕНЕРАЦИЯ ИЛИ ВПИСАТЬ ) ( вписать на русском или на предложением )
 
