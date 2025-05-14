@@ -181,7 +181,9 @@ def create_anki_card(wb, ws, use_ai):
             break
         
         print('\n---------------------------------------------\n') 
-          
+        print('Creating card in Anki...') 
         create_card_in_anki(deck_name, meaningReturn, final_front_sentences, search_word, meaning, final_back_sentences, transcriptionReturn, language_code)
-
+        
+        print('\n---------------------------------------------\n') 
+        print('Filling fields in Excel...') 
         inset_data_in_excel(wb, ws, usageRate, partOfSpeech, search_word, transcriptionReturn, meaningReturn, final_back_sentences, meaning)
